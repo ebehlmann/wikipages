@@ -7,6 +7,9 @@ class ContactsController < ApplicationController
 	def create
 		@contact = Contact.new(params[:contact])
 		if @contact.save
+			@phone = Phone.new(:number => @contact.phone,
+											:contact_id => @contact.id)
+			@phone.save
 			redirect_to("/contacts/#{@contact.id}")
 		else
 			render('contacts/new.html.erb')
