@@ -10,6 +10,7 @@ class ContactsController < ApplicationController
 			@phone = Phone.new(:number => @contact.phone,
 											:contact_id => @contact.id)
 			@phone.save
+			flash[:notice] = "Your contact was saved to Wikipages."
 			redirect_to("/contacts/#{@contact.id}")
 		else
 			render('contacts/new.html.erb')
