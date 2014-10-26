@@ -1,6 +1,6 @@
 <% content_for(:title, "Contacts | Wikipages") %>
 
-<h1>Contacts</h1>
+<h1 class="page-header">Contacts</h1>
 
 <ul>
 	<% @contacts.each do |contact| %>
@@ -8,4 +8,4 @@
 	<% end %>
 </ul>
 
-<a href="/contacts/new">Create a new contact</a>
+<%= link_to "New contact", new_contact_path, :class => "btn btn-default" %>

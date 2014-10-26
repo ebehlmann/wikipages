@@ -1,7 +1,6 @@
 class ContactsController < ApplicationController
 	def index
 		@contacts = Contact.all
-		render('contacts/index.html.erb')
 	end
 
 	def create
@@ -11,15 +10,14 @@ class ContactsController < ApplicationController
 											:contact_id => @contact.id)
 			@phone.save
 			flash[:notice] = "Your contact was saved to Wikipages."
-			redirect_to("/contacts/#{@contact.id}")
+			redirect_to contact_path(@contact)
 		else
-			render('contacts/new.html.erb')
+			render 'new'
 		end
 	end
 
 	def new
 		@contact = Contact.new
-		render('contacts/new.html.erb')
 	end
 
 	def show
@@ -29,21 +27,20 @@ class ContactsController < ApplicationController
 
 	def edit
 		@contact = Contact.find(params[:id])
-		render('contacts/edit.html.erb')
 	end
 
 	def update
 		@contact = Contact.find(params[:id])
 		if @contact.update(params[:contact])
-			redirect_to("/contacts/#{@contact.id}")
+			redirect_to contact_path(@contact)
 		else
-			render('contacts/edit.html.erb')
+			render 'edit'
 		end
 	end
 
 	def destroy
 		@contact = Contact.find(params[:id])
 		@contact.destroy
-		redirect_to("/contacts")
+		redirect_to contacts_path
 	end
 end
